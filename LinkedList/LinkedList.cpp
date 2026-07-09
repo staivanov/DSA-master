@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 class LinkedList{
 
     private:
@@ -28,6 +29,24 @@ class LinkedList{
         }
     }
 
+    void append(int value){
+        Node* newNode = new Node(value);
+
+        if(isLLEmpty){
+            head = newNode;
+            tail = newNode;
+        } 
+        else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+
+        length++;
+    }
+
+
+
+
     void printList(){
         Node* temp = head;
         
@@ -50,5 +69,9 @@ class LinkedList{
         cout << "Length: " << length << endl;
     }
 
-
+    private:
+      bool isLLEmpty()
+        {
+            return length == 0;
+        }
 };
