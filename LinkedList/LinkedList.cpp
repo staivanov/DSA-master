@@ -9,6 +9,7 @@ void prepend(int);
 Node* get(int index);
 
 bool isLLEmpty(void);
+bool isIndexNotValid(int index);
 void deleteLast(void);
 void deleteFirst(void);
 bool set(int index, int value);
@@ -76,10 +77,8 @@ class LinkedList{
     }
 
     Node* get(int index){
-
-        bool isIndexNotValid = (index < 0) || (index >= length);
-        
-        if(isIndexNotValid){
+      
+        if(isIndexNotValid(index)){
             return nullptr;
         }
 
@@ -122,6 +121,35 @@ class LinkedList{
 
         return !setSuccessful;
     }
+
+
+    bool insert(int index, int value){
+        bool insertSuccessful = true;
+
+        if(isIndexNotValid(index)){
+            return !insertSuccessful;
+        }
+
+        if(isLLEmpty()){
+            prepend(value);
+            return insertSuccessful;
+        }
+
+        if(index == length)
+        {
+            append(value);
+            return insertSuccessful;
+        }
+
+        Node* newNode = new Node(value);
+        Node* temp = get(index - 1);
+        newNode->next = temp->next;
+        temp->next = newNode;
+        length++;
+
+        return insertSuccessful;
+    }
+
 
     void deleteLast(){
         if (isLLEmpty())
@@ -178,5 +206,10 @@ class LinkedList{
      bool isLLEmpty()
         {
             return length == 0;
+        }
+
+    private:
+        bool isIndexNotValid(int index){
+            return (index < 0) || (index >= length);
         }
 };

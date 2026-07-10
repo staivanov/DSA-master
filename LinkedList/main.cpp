@@ -5,15 +5,16 @@ using namespace std;
 
 int main(){
 
-   LinkedList* ll = new LinkedList(5);
+   LinkedList* ll = new LinkedList(10);
    ll->append(50);
    ll->append(70);
    ll->append(100); 
    ll->printList();
    string separator (15, '*');
    cout << separator << endl;
-   ll->set(36,1);
-   cout << ll->get(1)->value << endl;
+   
+   ll->insert(2, 60);
+   ll->printList();
 
 
     return 0;
