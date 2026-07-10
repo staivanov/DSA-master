@@ -12,9 +12,8 @@ int main(){
    ll->printList();
    string separator (15, '*');
    cout << separator << endl;
-   ll->deleteFirst();
-   ll->printList();
-
+   Node* n = ll->get(3);
+   cout << n->value << endl;
 
 
     return 0;

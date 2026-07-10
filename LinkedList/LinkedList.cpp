@@ -6,6 +6,7 @@ using namespace std;
 // Methods for manipulating over the LL.
 void append(int);
 void prepend(int);
+Node* get(int index);
 
 bool isLLEmpty(void);
 void deleteLast(void);
@@ -72,6 +73,23 @@ class LinkedList{
         length++;
     }
 
+    Node* get(int index){
+
+        bool isIndexNotValid = (index < 0) || (index >= length);
+        
+        if(isIndexNotValid){
+            return nullptr;
+        }
+
+        Node* temp = head;
+        int cnt = 0;
+
+        while(cnt < index){
+            temp = temp->next;
+            cnt++;
+        }
+        return temp;
+    }
 
     void deleteFirst(){
 
