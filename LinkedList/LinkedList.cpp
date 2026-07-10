@@ -10,10 +10,11 @@ bool isLLEmpty(void);
 void deleteLast();
 
 // V/a printing functions on the LL.
-void printList();
-void getHead();
-void getTail();
-void getHead();
+void printList(void);
+void getHead(void);
+void getTail(void);
+void getHead(void);
+void getLength(void);
 
 
 class LinkedList{
@@ -66,6 +67,7 @@ class LinkedList{
             newNode->next = head;
             head = newNode;
         }
+        length++;
     }
 
     void deleteLast(){
