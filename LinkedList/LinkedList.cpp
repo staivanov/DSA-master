@@ -6,16 +6,17 @@ using namespace std;
 // Functions for CRUD operations.
 void append(int);
 void prepend(int);
-Node* get(int index);
 bool set(int index, int value);
+Node* get(int index);
 bool insert(int index, int value);
+void deleteFirst(void);
+void deleteLast(void);
+void deleteNode(int index);
 
+
+//Functions for v/a checks.
 bool isLLEmpty(void);
 bool isIndexNotValid(int index);
-
-void deleteLast(void);
-void deleteFirst(void);
-void deleteNode(int index);
 
 // V/a printing functions on the LL.
 void printList(void);
