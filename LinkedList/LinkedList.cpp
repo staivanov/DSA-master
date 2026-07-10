@@ -11,6 +11,7 @@ Node* get(int index);
 bool isLLEmpty(void);
 void deleteLast(void);
 void deleteFirst(void);
+bool set(int value, int index);
 
 // V/a printing functions on the LL.
 void printList(void);
@@ -106,6 +107,19 @@ class LinkedList{
 
        delete temp;
        length--;
+    }
+
+    bool set(int value, int index){
+        Node* temp = get(index);
+        bool setSuccessful = true;
+
+        if(temp){
+            temp->value = value;
+
+            return setSuccessful;
+        }
+
+        return !setSuccessful;
     }
 
     void deleteLast(){

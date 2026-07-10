@@ -12,8 +12,8 @@ int main(){
    ll->printList();
    string separator (15, '*');
    cout << separator << endl;
-   Node* n = ll->get(3);
-   cout << n->value << endl;
+   ll->set(36,1);
+   cout << ll->get(1)->value << endl;
 
 
     return 0;
