@@ -5,9 +5,11 @@ using namespace std;
 
 // Methods for manipulating over the LL.
 void append(int);
-void append(int);
+void prepend(int);
+
 bool isLLEmpty(void);
-void deleteLast();
+void deleteLast(void);
+void deleteFirst(void);
 
 // V/a printing functions on the LL.
 void printList(void);
@@ -68,6 +70,24 @@ class LinkedList{
             head = newNode;
         }
         length++;
+    }
+
+
+    void deleteFirst(){
+
+        if(isLLEmpty()) return;
+
+        Node* temp = head;
+
+        if(length == 1){
+            head = nullptr;
+            tail = nullptr;
+        } else {
+           head = head->next;
+        }
+
+       delete temp;
+       length--;
     }
 
     void deleteLast(){

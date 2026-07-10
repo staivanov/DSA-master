@@ -8,10 +8,12 @@ int main(){
    LinkedList* ll = new LinkedList(5);
    ll->append(50);
    ll->append(70);
-   ll->append(100);
-   ll->deleteLast();
+   ll->append(100); 
    ll->printList();
-   ll->prepend(11);
+   string separator (15, '*');
+   cout << separator << endl;
+   ll->deleteFirst();
+   ll->printList();
 
 
 
