@@ -45,28 +45,31 @@ class LinkedList{
     }
 
     void deleteLast(){
-        if(isLLEmpty()){
+        if (isLLEmpty())
             return;
-        }
 
         Node* temp = head;
-        Node* pre = head;
-
-        while(temp->next){
-            pre = temp;
-            temp = temp->next;
+        if (length == 1)
+        {
+            head = nullptr;
+            tail = nullptr;
         }
+        else
+        {
+            Node *pre = head;
 
-        tail = pre;
-        tail->next = nullptr;
-        length--;
+            while (temp->next)
+            {
+                pre = temp;
+                temp = temp->next;
+            }
 
-        if(isLLEmpty()){
-             head = nullptr;
-             tail = nullptr;
+            tail = pre;
+            tail->next = nullptr;
         }
 
         delete temp;
+        length--;
     }
 
 
