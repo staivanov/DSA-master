@@ -3,17 +3,19 @@
 
 using namespace std;
 
-// Methods for manipulating over the LL.
+// Functions for CRUD operations.
 void append(int);
 void prepend(int);
 Node* get(int index);
+bool set(int index, int value);
+bool insert(int index, int value);
 
 bool isLLEmpty(void);
 bool isIndexNotValid(int index);
+
 void deleteLast(void);
 void deleteFirst(void);
-bool set(int index, int value);
-bool insert(int index, int value);
+void deleteNode(int index);
 
 // V/a printing functions on the LL.
 void printList(void);
@@ -92,6 +94,19 @@ class LinkedList{
         return temp;
     }
 
+    void deleteNode(int index){
+
+        if(isIndexNotValid(index)) return;
+        if(isLLEmpty()) return deleteFirst();
+        if(index == length -1) return deleteLast();
+
+        Node* prev = get(index - 1);
+        Node* temp = prev->next;
+        prev->next = temp->next;
+        delete temp;
+        length--;
+    }
+
     void deleteFirst(){
 
         if(isLLEmpty()) return;
@@ -150,7 +165,6 @@ class LinkedList{
         return insertSuccessful;
     }
 
-
     void deleteLast(){
         if (isLLEmpty())
             return;
@@ -178,7 +192,6 @@ class LinkedList{
         delete temp;
         length--;
     }
-
 
     void printList(){
         Node* temp = head;

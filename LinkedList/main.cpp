@@ -12,10 +12,8 @@ int main(){
    ll->printList();
    string separator (15, '*');
    cout << separator << endl;
-   
-   ll->insert(2, 60);
+   ll->deleteNode(2);
    ll->printList();
-
 
     return 0;
 }
