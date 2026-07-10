@@ -32,7 +32,7 @@ class LinkedList{
     void append(int value){
         Node* newNode = new Node(value);
 
-        if(isLLEmpty){
+        if(isLLEmpty()){
             head = newNode;
             tail = newNode;
         } 
@@ -44,7 +44,30 @@ class LinkedList{
         length++;
     }
 
+    void deleteLast(){
+        if(isLLEmpty()){
+            return;
+        }
 
+        Node* temp = head;
+        Node* pre = head;
+
+        while(temp->next){
+            pre = temp;
+            temp = temp->next;
+        }
+
+        tail = pre;
+        tail->next = nullptr;
+        length--;
+
+        if(isLLEmpty()){
+             head = nullptr;
+             tail = nullptr;
+        }
+
+        delete temp;
+    }
 
 
     void printList(){
@@ -70,7 +93,7 @@ class LinkedList{
     }
 
     private:
-      bool isLLEmpty()
+     bool isLLEmpty()
         {
             return length == 0;
         }
