@@ -11,6 +11,7 @@ int main(){
    ll->append(100);
    ll->deleteLast();
    ll->printList();
+   ll->prepend(11);
 
 
 

@@ -3,6 +3,18 @@
 
 using namespace std;
 
+// Methods for manipulating over the LL.
+void append(int);
+void append(int);
+bool isLLEmpty(void);
+void deleteLast();
+
+// V/a printing functions on the LL.
+void printList();
+void getHead();
+void getTail();
+void getHead();
+
 
 class LinkedList{
 
@@ -42,6 +54,18 @@ class LinkedList{
         }
 
         length++;
+    }
+
+    void prepend(int value){
+        Node* newNode = new Node(value);
+
+        if(isLLEmpty()){
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode->next = head;
+            head = newNode;
+        }
     }
 
     void deleteLast(){
