@@ -12,6 +12,7 @@ bool isLLEmpty(void);
 void deleteLast(void);
 void deleteFirst(void);
 bool set(int index, int value);
+bool insert(int index, int value);
 
 // V/a printing functions on the LL.
 void printList(void);
