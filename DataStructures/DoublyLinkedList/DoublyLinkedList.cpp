@@ -10,8 +10,7 @@ bool set(int index, int value);
 bool insert(int index, int value);
 void deleteFirst(void);
 void deleteLast(void);
-
-
+void deleteNode(int index);
 
 //Functions for v/a checks.
 bool isDLLEmpty(void);
@@ -142,6 +141,25 @@ class DoublyLinkedList {
         return insertSucceed;
     }
 
+    void deleteFirst() {
+            if (isDLLEmpty())
+                return;
+
+            Node *temp = head;
+
+            if (isDLLContainsOnlyOneElement())
+            {
+                head = nullptr;
+                tail = nullptr;
+            }
+        else {
+            head = head->next;
+            head->prev = nullptr;
+        }
+
+        delete temp;
+        length--;
+    }
 
     void deleteLast(){
             Node* temp = tail;
@@ -160,24 +178,19 @@ class DoublyLinkedList {
             length--;
         }
 
-    void deleteFirst() {
-        if(isDLLEmpty()) return;
+    void deleteNode(int index){
 
-        Node* temp = head;
-        
-        if(isDLLContainsOnlyOneElement()){
-            head = nullptr;
-            tail = nullptr;
-        }
-        else {
-            head = head->next;
-            head->prev = nullptr;
-        }
-
+        if(isIndexNotValid(index)) return;
+        if(isDLLEmpty()) return deleteFirst();
+        int lastNode = length - 1;
+        if(index == lastNode) return deleteLast();
+   
+        Node* temp = get(index);
+        temp->next->prev = temp->prev;
+        temp->prev->next = temp->next;
         delete temp;
         length--;
     }
-
     
     void printList(){
         Node* temp = head;
@@ -216,5 +229,4 @@ class DoublyLinkedList {
         bool isIndexNotValid(int index){
             return (index < 0) || (index >= length);
         }
-
 };
