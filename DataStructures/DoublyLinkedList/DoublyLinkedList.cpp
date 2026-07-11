@@ -33,6 +33,8 @@ class DoublyLinkedList {
         int length;
 
     public:
+        /// @brief Constructor for Dobly Linked List.
+        /// @param value This is the initial elemen when Doubly Linked List is created.
         DoublyLinkedList(int value)
         {
             Node *newNode = new Node(value);
@@ -41,7 +43,8 @@ class DoublyLinkedList {
             length = 1;
         }
 
-
+    /// @brief Append value at the end of the Doubly Linked List.
+    /// @param value This element will be inserted at the end.
     void append(int value){
             Node* newNode = new Node(value);
 
@@ -57,7 +60,8 @@ class DoublyLinkedList {
 
             length++;
         }
-
+    /// @brief Prepend value at the beginning of the Doubly Linked List.
+    /// @param value This element will be inserted at the beginning.
     void prepend(int value){
             Node* newNode = new Node(value);
 
@@ -71,7 +75,9 @@ class DoublyLinkedList {
             }
             length++;
         }
-
+    /// @brief Get Node* based on provided index value from the Doubly Linked List.
+    /// @param index. The numbered position of an element in the Doubly Linked List.
+    /// @return Node* by the provided index. 
     Node* get(int index){
         if(isDLLEmpty()) return nullptr;
 
@@ -98,6 +104,10 @@ class DoublyLinkedList {
         return temp;
     }
 
+    /// @brief Set value at provided index in the Doubly Linked List.
+    /// @param index The numbered position of an element in the Doubly Linked List.
+    /// @param value This is the new element for exchange with the old element.
+    /// @return `true` or `false` value.
     bool set(int index, int value){
         Node* temp = get(index);
         bool setSuccessefully = true;
@@ -113,6 +123,10 @@ class DoublyLinkedList {
         return !setSuccessefully;
     }
 
+    /// @brief Insert value at prodived index in the Doubly Linked List.
+    /// @param index The numbered position of an element in the Doubly Linked List.
+    /// @param value This element will be inserted at index position.
+    /// @return `true` or `false` value.
     bool insert(int index, int value){
 
         bool insertSucceed = true;
@@ -141,6 +155,7 @@ class DoublyLinkedList {
         return insertSucceed;
     }
 
+    /// @brief Delete first node in the Doubly Linked List.
     void deleteFirst() {
             if (isDLLEmpty())
                 return;
@@ -161,6 +176,7 @@ class DoublyLinkedList {
         length--;
     }
 
+    /// @brief Delete last node in the Doubly Linked List.
     void deleteLast(){
             Node* temp = tail;
 
@@ -178,6 +194,8 @@ class DoublyLinkedList {
             length--;
         }
 
+    /// @brief Delete node at index position in the Doubly Linked List.
+    /// @param index The numbered position of an element in the Doubly Linked List.
     void deleteNode(int index){
 
         if(isIndexNotValid(index)) return;
@@ -192,6 +210,7 @@ class DoublyLinkedList {
         length--;
     }
     
+    /// @brief Print all nodes in the Doubly Linked List. Every node is on new line.
     void printList(){
         Node* temp = head;
         
@@ -201,31 +220,39 @@ class DoublyLinkedList {
             temp = temp->next;
         }
     }
-
+    /// @brief Print value of the head node in the Doubly Linked List.
     void getHead(){
         cout << "Head: " << head->value << endl;
     }
-
+    /// @brief Print value of the tail node in the Doubly Linked List.
     void getTail(){
         cout << "Tail: " << tail->value << endl;
     }
-
+    /// @brief Print current length of the Doubly Linked List.
     void getLength(){
         cout << "Length: " << length << endl;
     }
-
+    
     private:
+     /// @brief Check for emptiness of the Doubly Linked List.
+     /// @return `true` or `false`
      bool isDLLEmpty()
         {
             return length == 0;
         }
 
     private: 
+        /// @brief Check is there only one element in the Doubly Linked List.
+        /// @param void
+        /// @return `true` or `false`
         bool isDLLContainsOnlyOneElement(void){
             return length == 1;
         }
 
     private:
+        /// @brief Check for invalid index based out of the Doubly Linked List position.
+        /// @param index The numbered position of an element in the Doubly Linked List.
+        /// @return `true` or `false`
         bool isIndexNotValid(int index){
             return (index < 0) || (index >= length);
         }
