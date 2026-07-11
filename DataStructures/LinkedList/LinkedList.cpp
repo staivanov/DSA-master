@@ -6,8 +6,8 @@ using namespace std;
 // Functions for CRUD operations.
 void append(int);
 void prepend(int);
-bool set(int index, int value);
 Node* get(int index);
+bool set(int index, int value);
 bool insert(int index, int value);
 void deleteFirst(void);
 void deleteLast(void);
@@ -37,6 +37,8 @@ class LinkedList{
         int length;
 
     public:
+        /// @brief Constructor for Linked List.
+        /// @param value This is the initial elemen when Linked List is created.
         LinkedList(int value){
           Node* newNode = new Node(value);
           head = newNode;
@@ -44,6 +46,7 @@ class LinkedList{
           length = 1;
         }
 
+    /// @brief Deallocate memory from the heap who has been allocated previously when ctr was invoked.
     ~LinkedList(){
         Node* temp = head;
         
@@ -54,6 +57,8 @@ class LinkedList{
         }
     }
 
+    /// @brief Append value at the end of the Linked List.
+    /// @param value This element will be inserted at the end.
     void append(int value){
         Node* newNode = new Node(value);
 
@@ -69,6 +74,8 @@ class LinkedList{
         length++;
     }
 
+    /// @brief Prepend value at the beginning of the Linked List.
+    /// @param value This element will be inserted at the beginning.
     void prepend(int value){
         Node* newNode = new Node(value);
 
@@ -82,6 +89,9 @@ class LinkedList{
         length++;
     }
 
+    /// @brief Get Node* based on provided index value from the Linked List.
+    /// @param index. The numbered position of an element in the Linked List.
+    /// @return `Node*` by the provided index. 
     Node* get(int index){
       
         if(isIndexNotValid(index)){
@@ -98,6 +108,25 @@ class LinkedList{
         return temp;
     }
 
+    /// @brief Set value at provided index in the Linked List.
+    /// @param index The numbered position of an element in the Linked List.
+    /// @param value This is the new element for exchange with the old element.
+    /// @return `true` or `false` value.
+    bool set(int index, int value){
+        Node* temp = get(index);
+        bool setSuccessful = true;
+
+        if(temp){
+            temp->value = value;
+
+            return setSuccessful;
+        }
+
+        return !setSuccessful;
+    }
+
+    /// @brief Delete node at index position in the Linked List.
+    /// @param index The numbered position of an element in the Linked List.
     void deleteNode(int index){
 
         if(isIndexNotValid(index)) return;
@@ -111,6 +140,7 @@ class LinkedList{
         length--;
     }
 
+    /// @brief Delete first node in the Linked List.
     void deleteFirst(){
 
         if(isLLEmpty()) return;
@@ -128,20 +158,10 @@ class LinkedList{
        length--;
     }
 
-    bool set(int index, int value){
-        Node* temp = get(index);
-        bool setSuccessful = true;
-
-        if(temp){
-            temp->value = value;
-
-            return setSuccessful;
-        }
-
-        return !setSuccessful;
-    }
-
-
+    /// @brief Insert value at prodived index in the Linked List.
+    /// @param index The numbered position of an element in the Linked List.
+    /// @param value This element will be inserted at index position.
+    /// @return `true` or `false` value.
     bool insert(int index, int value){
         bool insertSuccessful = true;
 
@@ -168,7 +188,8 @@ class LinkedList{
 
         return insertSuccessful;
     }
-
+    
+    /// @brief Delete last node in the Linked List.
     void deleteLast(){
         if (isLLEmpty())
             return;
@@ -196,7 +217,7 @@ class LinkedList{
         delete temp;
         length--;
     }
-    
+    /// @brief Reverse order in the Linked List.
     void reverse(){
         Node* temp = head;
         head = tail;
@@ -213,7 +234,7 @@ class LinkedList{
         }
     }
 
-
+    /// @brief Print all nodes in the Linked List. Every node is on new line.
     void printList(){
         Node* temp = head;
         
@@ -223,26 +244,31 @@ class LinkedList{
             temp = temp->next;
         }
     }
-    
+    /// @brief Print value of the head node in the Linked List.
     void getHead(){
         cout << "Head: " << head->value << endl;
     }
-
+    /// @brief Print value of the tail node in the Linked List.
     void getTail(){
         cout << "Tail: " << tail->value << endl;
     }
-
+     /// @brief Print current length of the Linked List.
     void getLength(){
         cout << "Length: " << length << endl;
     }
 
     private:
+     /// @brief Check for emptiness of the Linked List.
+     /// @return `true` or `false`
      bool isLLEmpty()
         {
             return length == 0;
         }
 
     private:
+        /// @brief Check for invalid index based out of the Linked List position.
+        /// @param index The numbered position of an element in the Linked List.
+        /// @return `true` or `false`
         bool isIndexNotValid(int index){
             return (index < 0) || (index >= length);
         }
