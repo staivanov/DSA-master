@@ -206,7 +206,7 @@ class LinkedList{
             temp = temp->next;
         }
     }
-
+    
     void reverse(){
         Node* temp = head;
         head = tail;
