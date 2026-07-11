@@ -75,13 +75,25 @@ class DoublyLinkedList {
         if(isDLLEmpty()) return nullptr;
 
         Node* temp = head;
-        int start, end = index;
+        int start,
+            end = index,
+            firstHalfDLL = length / 2;
 
-        for (start = 0; start < end; start++)
-        {
-            temp = temp->next;
+        if(start < firstHalfDLL){
+            for (start = 0; start < end; start++)
+            {
+                temp = temp->next;
+            }
         }
+        else {
+            temp = tail;
 
+            for(start = length - 1; start > end; start--)
+                {
+                    temp = temp->prev;
+                }
+        }
+         
         return temp;
     }
 
