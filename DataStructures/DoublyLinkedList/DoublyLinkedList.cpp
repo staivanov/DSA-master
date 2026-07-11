@@ -6,6 +6,7 @@ using namespace std;
 void append(int value);
 void prepend(int value);
 Node* get(int index);
+bool set(int index, int value);
 void deleteFirst(void);
 void deleteLast(void);
 
@@ -95,6 +96,21 @@ class DoublyLinkedList {
         }
          
         return temp;
+    }
+
+    bool set(int index, int value){
+        Node* temp = get(index);
+        bool setSuccessefully = true;
+
+        if(temp){
+            temp->value = value;
+            return setSuccessefully;
+        }
+        else {
+
+        }
+
+        return !setSuccessefully;
     }
 
     void deleteLast(){
