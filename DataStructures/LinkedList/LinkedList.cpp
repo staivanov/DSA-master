@@ -196,16 +196,6 @@ class LinkedList{
         delete temp;
         length--;
     }
-
-    void printList(){
-        Node* temp = head;
-        
-        while(temp != nullptr)
-        {
-            cout << temp->value << endl;
-            temp = temp->next;
-        }
-    }
     
     void reverse(){
         Node* temp = head;
@@ -220,6 +210,17 @@ class LinkedList{
             temp->next = before;
             before = temp;
             temp = after;
+        }
+    }
+
+
+    void printList(){
+        Node* temp = head;
+        
+        while(temp != nullptr)
+        {
+            cout << temp->value << endl;
+            temp = temp->next;
         }
     }
     
