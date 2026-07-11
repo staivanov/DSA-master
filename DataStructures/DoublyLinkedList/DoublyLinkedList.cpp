@@ -7,6 +7,7 @@ void append(int value);
 void prepend(int value);
 Node* get(int index);
 bool set(int index, int value);
+bool insert(int index, int value);
 void deleteFirst(void);
 void deleteLast(void);
 
@@ -58,7 +59,7 @@ class DoublyLinkedList {
             length++;
         }
 
-    void prepent(int value){
+    void prepend(int value){
             Node* newNode = new Node(value);
 
             if(isDLLEmpty()){
@@ -113,6 +114,35 @@ class DoublyLinkedList {
         return !setSuccessefully;
     }
 
+    bool insert(int index, int value){
+
+        bool insertSucceed = true;
+
+        if(isIndexNotValid(index)) return !insertSucceed;
+
+        if(isDLLEmpty()){
+            prepend(value);
+            return insertSucceed;
+        }
+
+        if(index == length){
+            append(value);
+            return insertSucceed;
+        }
+
+        Node* newNode = new Node(value);
+        Node* before = get(index - 1);
+        Node* after = before->next;
+        newNode->prev = before;
+        newNode->next = after;
+        before->next = newNode;
+        after->prev = newNode;
+        length++;
+
+        return insertSucceed;
+    }
+
+
     void deleteLast(){
             Node* temp = tail;
 
@@ -147,7 +177,6 @@ class DoublyLinkedList {
         delete temp;
         length--;
     }
-
 
     
     void printList(){
