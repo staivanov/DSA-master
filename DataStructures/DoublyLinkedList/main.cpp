@@ -1,11 +1,21 @@
 #include <iostream>
 #include "DoublyLinkedList.cpp"
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
 
 int main(){
 
-   DoublyLinkedList* ll = new DoublyLinkedList(10);
+   DoublyLinkedList* dll = new DoublyLinkedList(10);
+   dll->append(30);
+   dll->append(50);
+   dll->printList();
+   string separator(15, '*');
+   cout << separator << endl;
+   dll->deleteFirst();
+   dll->printList();
+   
 
-       return 0;
+   return 0;
 }

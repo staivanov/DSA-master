@@ -1,8 +1,11 @@
+#include <iostream>
 #include "../DoublyLinkedList/Node.cpp"
+using namespace std;
 
 // Functions for CRUD operations.
 void append(int value);
 void prepend(int value);
+void deleteFirst(void);
 void deleteLast(void);
 
 
@@ -35,7 +38,8 @@ class DoublyLinkedList {
                 length = 1;
             }
 
-        void append(int value){
+
+    void append(int value){
             Node* newNode = new Node(value);
 
             if(isDLLEmpty()){
@@ -51,7 +55,7 @@ class DoublyLinkedList {
             length++;
         }
 
-        void prepent(int value){
+    void prepent(int value){
             Node* newNode = new Node(value);
 
             if(isDLLEmpty()){
@@ -66,7 +70,7 @@ class DoublyLinkedList {
         }
 
 
-        void deleteLast(){
+    void deleteLast(){
             Node* temp = tail;
 
             if(isDLLEmpty())return;
@@ -83,6 +87,23 @@ class DoublyLinkedList {
             length--;
         }
 
+    void deleteFirst() {
+        if(isDLLEmpty()) return;
+
+        Node* temp = head;
+        
+        if(isDLLContainsOnlyOneElement()){
+            head = nullptr;
+            tail = nullptr;
+        }
+        else {
+            head = head->next;
+            head->prev = nullptr;
+        }
+
+        delete temp;
+        length--;
+    }
 
 
 
