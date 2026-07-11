@@ -12,7 +12,7 @@ int main(){
    ll->printList();
    string separator (15, '*');
    cout << separator << endl;
-   ll->deleteNode(2);
+   ll->reverse();
    ll->printList();
 
     return 0;

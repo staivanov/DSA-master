@@ -13,6 +13,9 @@ void deleteFirst(void);
 void deleteLast(void);
 void deleteNode(int index);
 
+//Sorting
+void reverse(void);
+
 
 //Functions for v/a checks.
 bool isLLEmpty(void);
@@ -201,6 +204,22 @@ class LinkedList{
         {
             cout << temp->value << endl;
             temp = temp->next;
+        }
+    }
+
+    void reverse(){
+        Node* temp = head;
+        head = tail;
+        tail = temp;
+
+        Node* after = temp->next;
+        Node* before = nullptr;
+
+        for(int i = 0; i < length; i++){
+            after = temp->next;
+            temp->next = before;
+            before = temp;
+            temp = after;
         }
     }
     
