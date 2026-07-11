@@ -5,6 +5,7 @@ using namespace std;
 // Functions for CRUD operations.
 void append(int value);
 void prepend(int value);
+Node* get(int index);
 void deleteFirst(void);
 void deleteLast(void);
 
@@ -30,13 +31,14 @@ class DoublyLinkedList {
         Node* tail;
         int length;
 
-        public:
-            DoublyLinkedList(int value){
-                Node* newNode = new Node(value);
-                head = newNode;
-                tail = newNode;
-                length = 1;
-            }
+    public:
+        DoublyLinkedList(int value)
+        {
+            Node *newNode = new Node(value);
+            head = newNode;
+            tail = newNode;
+            length = 1;
+        }
 
 
     void append(int value){
@@ -69,6 +71,19 @@ class DoublyLinkedList {
             length++;
         }
 
+    Node* get(int index){
+        if(isDLLEmpty()) return nullptr;
+
+        Node* temp = head;
+        int start, end = index;
+
+        for (start = 0; start < end; start++)
+        {
+            temp = temp->next;
+        }
+
+        return temp;
+    }
 
     void deleteLast(){
             Node* temp = tail;
@@ -106,7 +121,7 @@ class DoublyLinkedList {
     }
 
 
-
+    
     void printList(){
         Node* temp = head;
         

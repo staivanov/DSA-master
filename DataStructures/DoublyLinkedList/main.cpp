@@ -13,8 +13,8 @@ int main(){
    dll->printList();
    string separator(15, '*');
    cout << separator << endl;
-   dll->deleteFirst();
-   dll->printList();
+   Node* node = dll->get(0);
+   cout << node->value << endl; 
    
 
    return 0;
