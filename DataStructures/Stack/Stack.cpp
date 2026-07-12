@@ -65,6 +65,4 @@ class Stack{
         bool isStackEmpty(){
             return height == 0;
         }
-
-
 };  
