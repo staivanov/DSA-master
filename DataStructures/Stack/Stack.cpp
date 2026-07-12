@@ -16,6 +16,20 @@ class Stack{
             height = 1;
         }
 
+    void push(int value){
+        Node* newNode = new Node(value);
+
+        if(isStackEmpty()){
+            top = newNode;
+        }
+        else {
+            newNode->next = top;
+            top = newNode;
+        }
+        
+        height++;
+    }
+
 
     void printStack(){
         Node* temp = top;
@@ -33,4 +47,11 @@ class Stack{
     void getHeight(){
         cout << "Height " << height << endl;
     }
+
+    private:
+        bool isStackEmpty(){
+            return height == 0;
+        }
+
+
 };  
