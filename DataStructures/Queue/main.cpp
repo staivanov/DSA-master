@@ -6,7 +6,10 @@ using namespace std;
 int main(){
 
     Queue* queue = new Queue(10);
-    queue->getLast();
+    queue->enqueue(20);
+    queue->enqueue(30);
+    queue->printQueue();
+
 
 
 

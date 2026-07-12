@@ -17,7 +17,20 @@ class Queue {
             length = 1;
         }
 
-    
+    void enqueue(int value){
+        Node* newNode = new Node(value);
+
+        if(isQueueEmpty()){
+            first = newNode;
+            last = newNode;
+        }
+        else {
+            last->next = newNode;
+            last = newNode;
+        }
+
+        length++;
+    }
     
 
     void printQueue(){
@@ -37,8 +50,13 @@ class Queue {
         cout << last->value << endl;
     }
 
-    
+
     void getLength(){
         cout << length << endl;
     }
+
+    private:
+        bool isQueueEmpty(){
+            return length == 0;
+        }
 };
