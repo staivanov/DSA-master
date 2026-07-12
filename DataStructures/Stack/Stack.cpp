@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 #include "../Stack/Node.cpp"
 using namespace std;
 
@@ -26,17 +27,29 @@ class Stack{
             newNode->next = top;
             top = newNode;
         }
-        
+
         height++;
     }
 
+    int pop(){
+
+        if(isStackEmpty()) return INT_MIN;
+
+        Node* temp = top;
+        int poppedValue = top->value;
+        top = top->next;
+        delete temp;
+        height--;
+
+        return poppedValue;
+    }
 
     void printStack(){
         Node* temp = top;
 
         while(temp){
             cout << temp->value << endl;
-            temp = top->next;
+            temp = temp->next;
         }
     }
 
