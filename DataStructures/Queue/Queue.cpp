@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 #include "../Queue/Node.cpp"
 
 using namespace std;
@@ -32,6 +33,27 @@ class Queue {
         length++;
     }
     
+    int dequeue(){
+
+        if(isQueueEmpty()) return INT_MIN;
+
+        Node* temp = first;
+        int dequeueValue = first->value;
+        bool isQueueContainsOnlyOneElement = length == 1;
+
+        if(isQueueContainsOnlyOneElement){
+            first = nullptr;
+            last = nullptr;
+        }
+        else {
+            first = first->next;    
+        }
+
+        delete temp;
+        length--;
+
+        return dequeueValue;
+    }
 
     void printQueue(){
         Node* temp = first;

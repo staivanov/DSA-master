@@ -9,9 +9,10 @@ int main(){
     queue->enqueue(20);
     queue->enqueue(30);
     queue->printQueue();
-
-
-
+    string tkn(15, '*');
+    cout << tkn << endl;
+    queue->dequeue();
+    queue->printQueue();
 
     return 0;
 }
