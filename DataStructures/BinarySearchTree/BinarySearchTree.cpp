@@ -3,7 +3,7 @@
 
 
 class BinarySearchTree {
-    private:
+    public:
         Node* root;
 
     public:
@@ -11,7 +11,47 @@ class BinarySearchTree {
             root = nullptr;
     }
 
-    
+    bool insert(int value){
+        Node* newNode = new Node(value);
+
+        if(root = nullptr){
+            root = newNode;
+            return true;
+        }
+
+        Node* temp = root; 
+        bool areNodesDifferent = true,
+             nodeSuccessfullyPlaced = true;
+        
+        while(true){
+            if(newNode->value == temp->value) 
+                return !areNodesDifferent;
+
+            if(newNode->value < temp->value)
+            {
+                bool isLeftSideEmpty = temp->left == nullptr;
+
+                if(isLeftSideEmpty){
+                    temp->left = newNode;
+
+                    return nodeSuccessfullyPlaced;
+                }
+
+                temp = temp->left;
+            } else {
+                bool  isRightSideEmpty = temp->right == nullptr;
+
+                if(isRightSideEmpty){
+                    temp->right = newNode;
+
+                    return nodeSuccessfullyPlaced;
+                }
+
+                temp = temp->right;
+            }
+        }
+    }
+
 
 
 };
