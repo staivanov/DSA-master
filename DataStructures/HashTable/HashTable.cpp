@@ -1,8 +1,10 @@
 #include <iostream>
+#include <vector>
 #include "../HashTable/Node.cpp"
 
 using std::cout;
 using std::endl;
+using std::vector;
 
 class HashTable {
 
@@ -10,7 +12,6 @@ class HashTable {
         static const int SIZE = 7;
         Node* dataMap[SIZE];
         
-    
     public:
         void set(string key, int value){
             int index = hash(key);
@@ -31,6 +32,7 @@ class HashTable {
         }
 
         int get(string key){
+
             int index = hash(key);
             Node* temp = dataMap[index];
 
@@ -48,21 +50,49 @@ class HashTable {
 
             return 0;
         }
+
         
+        vector<string> getAllKeys(){
+
+            int index = 0;
+            vector<string> allKeys = {};
+
+            while(index < SIZE){
+
+                Node* temp = dataMap[index];
+
+                while(temp != nullptr){
+
+                    allKeys.push_back(temp->key);
+                    temp = temp->next;
+                }
+
+                index++;
+            }
+
+            return allKeys;
+        }
+
 
     public:
         void printTable(){
             int index = 0;
 
             while(index < SIZE){
+
                 cout << index << ":" << endl;
+
                 if(dataMap[index]){
+
                     Node* temp = dataMap[index];
-                    while(temp){
+
+                    while(temp)
+                    {
                         cout << "   {" << temp->key << " - " << temp->value << "}\n";
                         temp = temp->next;
                     }
                 }
+                
                 index++;
             }
         }
@@ -70,9 +100,9 @@ class HashTable {
     private:
         int hash(string key)
         {
-            int hash = 0;
-            int index = 0,
-                   keyLength = key.length();
+            int hash = 0,
+                index = 0,
+                keyLength = key.length();
 
             while (index < keyLength)
             {
