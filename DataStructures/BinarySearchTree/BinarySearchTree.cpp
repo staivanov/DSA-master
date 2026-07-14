@@ -52,6 +52,23 @@ class BinarySearchTree {
         }
     }
 
+    bool contains(int value){
+        
+        bool nodeExist = true;
+        Node* temp = root;
 
+        while(temp){
+            if(value < temp->value){
+                temp = temp->left;
+            } else if(value > temp->value) {
+                temp = temp->right;
+            }
+            else {
+                return nodeExist;
+            }
+        }
+
+        return !nodeExist;
+    }
 
 };
