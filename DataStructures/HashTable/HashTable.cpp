@@ -14,7 +14,7 @@ class HashTable {
 
     public:
         void printTable(){
-            decltype(SIZE) index = 0;
+            int index = 0;
 
             while(index < SIZE){
                 cout << index << ":" << endl;
@@ -25,6 +25,7 @@ class HashTable {
                         temp = temp->next;
                     }
                 }
+                index++;
             }
         }
 };
