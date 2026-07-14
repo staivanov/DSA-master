@@ -25,7 +25,7 @@ class BinarySearchTree {
         
         while(true){
             if(newNode->value == temp->value) 
-                return !areNodesDifferent;
+                return false;
 
             if(newNode->value < temp->value)
             {
@@ -34,7 +34,7 @@ class BinarySearchTree {
                 if(isLeftSideEmpty){
                     temp->left = newNode;
 
-                    return nodeSuccessfullyPlaced;
+                    return true;
                 }
 
                 temp = temp->left;
@@ -44,7 +44,7 @@ class BinarySearchTree {
                 if(isRightSideEmpty){
                     temp->right = newNode;
 
-                    return nodeSuccessfullyPlaced;
+                    return true;
                 }
 
                 temp = temp->right;
