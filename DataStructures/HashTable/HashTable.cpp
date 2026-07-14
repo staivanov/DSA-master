@@ -30,6 +30,26 @@ class HashTable {
             }
         }
 
+        int get(string key){
+            int index = hash(key);
+            Node* temp = dataMap[index];
+
+            while(temp != nullptr){
+
+                bool isThereKeysMatch = temp->key == key;
+
+                if(isThereKeysMatch) 
+                {
+                    return temp->value;
+                }
+
+                temp = temp->next;
+            }
+
+            return 0;
+        }
+        
+
     public:
         void printTable(){
             int index = 0;

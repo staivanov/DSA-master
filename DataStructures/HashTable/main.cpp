@@ -8,9 +8,9 @@ int main(){
     ht->set("Varna", 9000);
     ht->set("Plovdiv", 4000);
     ht->set("Sofia", 1000);
-    ht->printTable();
-
-
+    //ht->printTable();
+    int pkVarna = ht->get("Varna");
+    cout <<"Postal code of Varna is: " << pkVarna << endl;
 
     return 0;
 }
