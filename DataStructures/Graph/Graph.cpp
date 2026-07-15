@@ -11,7 +11,7 @@ using std::cout;
 
 
 class Graph {
-    private:
+    private: 
         unordered_map<string, unordered_set<string>> adjList;
     
     public:
@@ -32,8 +32,9 @@ class Graph {
         bool addEdge(string vertexOne, string vertexTwo){
 
             bool edgeSuccessfullyAdded = true;
+            bool bothVerticesExist = vertexExist(vertexOne) && vertexExist(vertexTwo);
 
-            if (vertexExist(vertexOne) && vertexExist(vertexTwo))
+            if (bothVerticesExist)
             {
                 adjList.at(vertexOne).insert(vertexTwo);
                 adjList.at(vertexTwo).insert(vertexOne);
@@ -44,11 +45,42 @@ class Graph {
             return !edgeSuccessfullyAdded;
         }
 
+        bool removeVertex(string vertex){
+
+            bool successfullyRemovedVertex = true;
+            
+            if(vertexDoesntExist(vertex)){
+                return !successfullyRemovedVertex;
+            }
+
+            for(string currentVertex: adjList.at(vertex)){
+                adjList.at(currentVertex).erase(vertex);
+            }
+            adjList.erase(vertex);
+
+            return successfullyRemovedVertex;
+        }
+
+        bool removeEdge(string vertexOne, string vertexTwo){
+
+            bool edgeSuccessfullyRemoved = true;
+
+            if(vertexExist(vertexOne) && vertexExist(vertexTwo)){
+
+               adjList.at(vertexOne).erase(vertexTwo);
+               adjList.at(vertexTwo).erase(vertexOne);
+
+               return edgeSuccessfullyRemoved;
+            }
+
+            return !edgeSuccessfullyRemoved;
+        }
+
         void printGraph(){
               
                 for(auto [vertex, edges]: adjList){
 
-                    cout << vertex << ": [";
+                    cout << vertex << ": [ ";
 
                     for(string edge: edges){
                         cout << edge << " ";
