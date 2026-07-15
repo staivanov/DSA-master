@@ -6,33 +6,51 @@
 using std::unordered_map;
 using std::unordered_set;
 using std::string;
-
+using std::endl;
+using std::cout;
 
 
 class Graph {
     private:
         unordered_map<string, unordered_set<string>> adjList;
+    
+    public:
+        bool addVertex(string vertex){
 
-    bool addVertex(string vertex){
+            bool vertexSuccessfullyAdded = true;
 
-        bool vertexSuccessfullyAdded = true;
+            if(elementDoesntExist(vertex)){
 
-        if(elementDoesntExist(vertex)){
-            adjList[vertex];
+                adjList[vertex];
 
-            return vertexSuccessfullyAdded;
+                return vertexSuccessfullyAdded;
+            }
+
+            return !vertexSuccessfullyAdded;
         }
-        
-        return !vertexSuccessfullyAdded;
-    }
+
+        void printGraph(){
+              
+                for(auto [vertex, edges]: adjList){
+
+                    cout << vertex << ": [";
+
+                    for(string edge: edges){
+                        cout << edge << " ";
+                    }
+
+                    cout << "]" << endl;
+                }  
+        }
 
 
     private:
         bool elementExist(string vertex){
-                adjList.count(vertex) == 1;
+                return adjList.count(vertex) == 1;
         }
+
         bool elementDoesntExist(string vertex){
-                adjList.count(vertex) == 0;
+                return adjList.count(vertex) == 0;
         }
 
 };

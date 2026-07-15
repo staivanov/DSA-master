@@ -1,10 +1,13 @@
 #include <iostream>
+#include "../Graph/Graph.cpp"
 
-using namespace std;
 
 int main() {
 
-
+    Graph* graph = new Graph();
+    string vertexA = "A";
+    graph->addVertex(vertexA);
+    graph->printGraph();
 
 
 
