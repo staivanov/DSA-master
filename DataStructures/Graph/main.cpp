@@ -3,14 +3,16 @@
 
 
 int main() {
-
+    //Graph with two vertices without an edge between them.
     Graph* graph = new Graph();
-    string vertexA = "A";
-    graph->addVertex(vertexA);
+    string a = "A";
+    graph->addVertex(a);
+    string b = "B"; 
+    graph->addVertex(b);
     graph->printGraph();
-
-
-
+    //Graph with two vertices and edge between them.
+    graph->addEdge(a, b);
+    graph->printGraph();
 
     return 0;
 }

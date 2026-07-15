@@ -19,7 +19,7 @@ class Graph {
 
             bool vertexSuccessfullyAdded = true;
 
-            if(elementDoesntExist(vertex)){
+            if(vertexDoesntExist(vertex)){
 
                 adjList[vertex];
 
@@ -27,6 +27,21 @@ class Graph {
             }
 
             return !vertexSuccessfullyAdded;
+        }
+
+        bool addEdge(string vertexOne, string vertexTwo){
+
+            bool edgeSuccessfullyAdded = true;
+
+            if (vertexExist(vertexOne) && vertexExist(vertexTwo))
+            {
+                adjList.at(vertexOne).insert(vertexTwo);
+                adjList.at(vertexTwo).insert(vertexOne);
+
+                return edgeSuccessfullyAdded;
+            }
+
+            return !edgeSuccessfullyAdded;
         }
 
         void printGraph(){
@@ -45,11 +60,11 @@ class Graph {
 
 
     private:
-        bool elementExist(string vertex){
+        bool vertexExist(string vertex){
                 return adjList.count(vertex) == 1;
         }
 
-        bool elementDoesntExist(string vertex){
+        bool vertexDoesntExist(string vertex){
                 return adjList.count(vertex) == 0;
         }
 
