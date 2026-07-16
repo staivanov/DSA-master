@@ -38,11 +38,12 @@ class Heap {
             else {
                 heap[0] = heap.back();
                 heap.pop_back();
-              
+                sinkDown(0);
             }
 
             return maxValue;
         }
+
 
 
     public:
@@ -60,6 +61,33 @@ class Heap {
         }
 
     private:
+        //Compare childres if someone is bigger than paren. If it's true swap till heap is valid.
+        void sinkDown(int index){
+
+            int maxIndex = index;
+            
+            while(true){
+
+                int leftIndex = leftChild(index);
+                int rightIndex = rightChild(index);
+
+                if(heap[leftIndex] > heap[maxIndex] && (leftIndex < heap.size())){
+                    maxIndex = leftIndex;
+                }
+
+                if(heap[rightIndex] > (heap[maxIndex] && rightIndex < heap.size())){
+                    maxIndex = rightIndex;
+                }
+
+                if(maxIndex != index){
+                    swap(index, maxIndex);
+                    index = maxIndex;
+                } else {
+                    return;
+                }
+            }
+        }
+
         int parent(int index){
         return (index - 1) / 2;
     }
