@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <climits>
 
 using std::cout;
 using std::endl;
@@ -24,6 +25,26 @@ class Heap {
             }
         }
 
+        int remove(){
+            if(heap.empty()){
+                return INT_MIN;
+            }
+
+            int maxValue = heap.front();
+
+            if(heap.size() == 1){
+                heap.pop_back();
+            }
+            else {
+                heap[0] = heap.back();
+                heap.pop_back();
+              
+            }
+
+            return maxValue;
+        }
+
+
     public:
         void printHeap(){
             cout << "\n[";
@@ -38,29 +59,22 @@ class Heap {
             cout << "]" << endl;
         }
 
-    
-    int parent(int index){
+    private:
+        int parent(int index){
         return (index - 1) / 2;
     }
 
-    int leftChild(int index){
+        int leftChild(int index){
         return 2 * index + 1;
     }
 
-    int rightChild(int index){
+        int rightChild(int index){
         return 2 * index + 2;
     }
 
-
-    void swap(int indexOne, int indexTwo){
-        int temp = heap[indexOne];
-        heap[indexOne] = heap[indexTwo];
-        heap[indexTwo] = temp;
-    }
-
-
-
-
-
-
+        void swap(int indexOne, int indexTwo){
+            int temp = heap[indexOne];
+            heap[indexOne] = heap[indexTwo];
+            heap[indexTwo] = temp;
+        }
 };
