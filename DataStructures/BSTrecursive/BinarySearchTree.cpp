@@ -59,14 +59,23 @@ class BinarySearchTree {
 
     bool rContains(Node* currentNode, int value){
 
-        
+        bool nodeExist = true,
+         nonExistingNode = currentNode == nullptr;
 
+        if (nonExistingNode)
+            return !nodeExist;
 
+        if(currentNode->value == value) return nodeExist;
+
+        if(value < currentNode->value){
+            return rContains(currentNode->left, value);
+        } else {
+            return rContains(currentNode->right, value);
+        }
     }
 
 
     bool rContains(int value){
         return rContains(root, value);
     }
-
 };

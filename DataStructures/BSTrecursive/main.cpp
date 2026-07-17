@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../BinarySearchTree/BinarySearchTree.cpp"
+#include "../BSTrecursive/BinarySearchTree.cpp"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ int main(){
    bst->insert(52);
    bst->insert(86);
 
-   cout << bst->root->left->right->value << endl;
+
    
    return 0;
 } 
