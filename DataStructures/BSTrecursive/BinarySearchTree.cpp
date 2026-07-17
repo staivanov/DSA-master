@@ -6,6 +6,7 @@ class BinarySearchTree {
     public:
         Node* root;
 
+        
     public:
         BinarySearchTree(){
             root = nullptr;
@@ -24,6 +25,7 @@ class BinarySearchTree {
             return currentNode;
         }
 
+
         void insert(int value){
             if(root == nullptr){
                 root = new Node(value);
@@ -31,6 +33,7 @@ class BinarySearchTree {
 
             insert(root, value);
         }
+
 
         bool contains(Node* currentNode, int value){
 
@@ -49,11 +52,12 @@ class BinarySearchTree {
             }
         }
 
+
         bool contains(int value){
             return contains(root, value);
         }
 
-
+        //Delete a leaf Node, Node with left or right child and two children.
         Node* deleteNode(Node* currentNode, int value){
 
             if(value < currentNode->value){
@@ -67,25 +71,34 @@ class BinarySearchTree {
 
                     Node* temp = currentNode->right;
                     delete(currentNode);
+
                     return temp;
                 } else if(currentNode->right == nullptr){
 
                     Node *temp = currentNode->left;
                     delete(currentNode);
+
                     return temp;
                 } else {
-                     
+
+                     int subTreeMin = minValue(currentNode->right);
+                     currentNode->value = subTreeMin;
+                     currentNode->right = deleteNode(currentNode->right, subTreeMin); 
                 }
             }
 
             return currentNode;
         }
 
-        void deleteNode(int value){
+
+        void deleteNode(int value)
+        {
             root = deleteNode(root, value);
         }
 
+
         int minValue(Node* currentNode){
+
             while(currentNode->left != nullptr){
                 currentNode = currentNode->left;
             }
