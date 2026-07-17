@@ -11,53 +11,29 @@ class BinarySearchTree {
             root = nullptr;
     }
 
-    bool insert(int value){
 
-        Node* newNode = new Node(value);
-        bool areNodesDifferent = true,
-             nodeSuccessfullyPlaced = true;
+    Node* insert(Node* currentNode, int value){
+        if(currentNode == nullptr) return new Node(value);
 
-        if(root = nullptr){
-            root = newNode;
-            return nodeSuccessfullyPlaced;
+        if(value < currentNode->value){
+            currentNode->left = insert(currentNode->left, value);
+        } else if( value > currentNode->value) {
+            currentNode->right = insert(currentNode->right, value);
         }
 
-        Node* temp = root;
-
-        while(true){ 
-
-            if(newNode->value == temp->value) 
-                return !nodeSuccessfullyPlaced;
-
-            if(newNode->value < temp->value)
-            {
-                bool isLeftSideEmpty = temp->left == nullptr;
-
-                if(isLeftSideEmpty){
-                    temp->left = newNode;
-
-                    nodeSuccessfullyPlaced = true;
-                    return nodeSuccessfullyPlaced;
-                }
-
-                temp = temp->left;
-            } else {
-                
-                bool isRightSideEmpty = (temp->right == nullptr);
-
-                if(isRightSideEmpty){
-                    temp->right = newNode;
-
-                        nodeSuccessfullyPlaced = true;
-                    return nodeSuccessfullyPlaced;
-                }
-
-                temp = temp->right;
-            }
-        }
+        return currentNode;
     }
 
-    bool rContains(Node* currentNode, int value){
+    void insert(int value){
+        if(root == nullptr){
+            root = new Node(value);
+        }
+
+        insert(root, value);
+    }
+
+
+    bool contains(Node* currentNode, int value){
 
         bool nodeExist = true,
          nonExistingNode = currentNode == nullptr;
@@ -68,14 +44,14 @@ class BinarySearchTree {
         if(currentNode->value == value) return nodeExist;
 
         if(value < currentNode->value){
-            return rContains(currentNode->left, value);
+            return contains(currentNode->left, value);
         } else {
-            return rContains(currentNode->right, value);
+            return contains(currentNode->right, value);
         }
     }
 
 
-    bool rContains(int value){
-        return rContains(root, value);
+    bool contains(int value){
+        return contains(root, value);
     }
 };

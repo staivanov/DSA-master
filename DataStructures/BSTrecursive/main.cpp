@@ -15,7 +15,7 @@ int main(){
    bst->insert(52);
    bst->insert(86);
 
-
+   cout << bst->contains(86) << endl;
    
    return 0;
 } 
