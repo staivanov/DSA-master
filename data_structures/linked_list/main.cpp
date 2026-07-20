@@ -1,0 +1,19 @@
+#include <iostream>
+#include "linked_list.cpp"
+
+using namespace std;
+
+int main(){
+
+   LinkedList* ll = new LinkedList(10);
+   ll->append(50);
+   ll->append(70);
+   ll->append(100); 
+   ll->printList();
+   string separator (15, '*');
+   cout << separator << endl;
+   ll->reverse();
+   ll->printList();
+
+    return 0;
+}
