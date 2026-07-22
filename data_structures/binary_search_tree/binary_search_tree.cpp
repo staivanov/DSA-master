@@ -17,7 +17,7 @@ class BinarySearchTree {
         bool areNodesDifferent = true,
              nodeSuccessfullyPlaced = true;
 
-        if(root = nullptr){
+        if(root == nullptr){
             root = newNode;
             return nodeSuccessfullyPlaced;
         }
