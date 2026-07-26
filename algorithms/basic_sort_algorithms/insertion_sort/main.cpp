@@ -12,18 +12,8 @@ int main(){
     int numbers[sz] = {91, 45, 11, 16, 82, 41};
     insertionSort(numbers, sz);
 
-    int index = 0;
-
-    while(index < sz)
-    {
-        if(index == sz - 1){
-            cout << numbers[index] << endl;
-            break;
-        }
-        cout << numbers[index] << ", ";
-        index++;
-    }
-
+    for(int number: numbers)
+        cout << number << endl;
 
     return 0;
 }
