@@ -10,15 +10,9 @@ int main(){
     unsigned sz = sizeof(numbers) / sizeof(numbers[0]);
 
     bubbleSort(numbers, sz);
-    signed index = 0,
-            lastIndex = sz - 1;
 
-    while(index < sz){
-        if (index == lastIndex)
-            cout << numbers[index] << endl;
-        cout << numbers[index] << ", ";
-        index++;
-    }
+    for (int number : numbers)
+        cout << number << endl;
 
     return 0;
 }
