@@ -40,6 +40,7 @@ class LinkedList{
         /// @brief Constructor for Linked List.
         /// @param value This is the initial elemen when Linked List is created.
         LinkedList(int value){
+
           Node* newNode = new Node(value);
           head = newNode;
           tail = newNode;
@@ -60,6 +61,7 @@ class LinkedList{
     /// @brief Append value at the end of the Linked List.
     /// @param value This element will be inserted at the end.
     void append(int value){
+
         Node* newNode = new Node(value);
 
         if(isLLEmpty()){
@@ -77,6 +79,7 @@ class LinkedList{
     /// @brief Prepend value at the beginning of the Linked List.
     /// @param value This element will be inserted at the beginning.
     void prepend(int value){
+
         Node* newNode = new Node(value);
 
         if(isLLEmpty()){
@@ -113,6 +116,7 @@ class LinkedList{
     /// @param value This is the new element for exchange with the old element.
     /// @return `true` or `false` value.
     bool set(int index, int value){
+
         Node* temp = get(index);
         bool setSuccessful = true;
 
@@ -163,7 +167,14 @@ class LinkedList{
     /// @param value This element will be inserted at index position.
     /// @return `true` or `false` value.
     bool insert(int index, int value){
+
         bool insertSuccessful = true;
+
+        if(index == 0){      
+            prepend(value);
+
+            return insertSuccessful;
+        }
 
         if(isIndexNotValid(index)){
             return !insertSuccessful;
@@ -270,6 +281,6 @@ class LinkedList{
         /// @param index The numbered position of an element in the Linked List.
         /// @return `true` or `false`
         bool isIndexNotValid(int index){
-            return (index < 0) || (index >= length);
+            return (index < 0) || (index > length);
         }
 };
