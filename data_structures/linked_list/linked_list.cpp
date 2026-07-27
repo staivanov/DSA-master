@@ -3,31 +3,6 @@
 
 using namespace std;
 
-// Functions for CRUD operations.
-void append(int);
-void prepend(int);
-Node* get(int index);
-bool set(int index, int value);
-bool insert(int index, int value);
-void deleteFirst(void);
-void deleteLast(void);
-void deleteNode(int index);
-
-//Sorting
-void reverse(void);
-
-
-//Functions for v/a checks.
-bool isLLEmpty(void);
-bool isIndexNotValid(int index);
-
-// V/a printing functions on the LL.
-void printList(void);
-void getHead(void);
-void getTail(void);
-void getHead(void);
-void getLength(void);
-
 
 class LinkedList{
 
