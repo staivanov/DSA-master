@@ -257,11 +257,21 @@ class LinkedList{
     }
     /// @brief Print value of the head node in the Linked List.
     void getHead(){
+        if(head){
         cout << "Head: " << head->value << endl;
+        }
+        else {
+            cout << "Empty" << endl;
+        }
     }
     /// @brief Print value of the tail node in the Linked List.
     void getTail(){
+        if(tail){
         cout << "Tail: " << tail->value << endl;
+        }
+        else {
+            cout << "Empty" << endl;
+        }
     }
      /// @brief Print current length of the Linked List.
     void getLength(){
