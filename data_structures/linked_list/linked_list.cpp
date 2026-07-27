@@ -109,7 +109,7 @@ class LinkedList{
     void deleteNode(int index){
 
         if(isIndexNotValid(index)) return;
-        if(isLLEmpty()) return deleteFirst();
+        if(index == 0) return deleteFirst();
         if(index == length -1) return deleteLast();
 
         Node* prev = get(index - 1);
