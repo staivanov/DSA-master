@@ -228,8 +228,12 @@ class LinkedList{
         delete temp;
         length--;
     }
-    /// @brief Reverse order in the Linked List.
+    /// @brief Reverse the order in the Linked List.
     void reverse(){
+
+        if (length <= 1)
+            return;
+
         Node* temp = head;
         head = tail;
         tail = temp;
