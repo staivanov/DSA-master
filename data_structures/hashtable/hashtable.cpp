@@ -16,6 +16,46 @@ private:
     Node *dataMap[SIZE];
 
 public:
+    ///@brief Default constructor. Initializes every bucket to nullptr.
+    HashTable()
+    {
+        for (Node *currentNode : dataMap)
+            currentNode == nullptr;
+    }
+
+    /// @brief Copy constructor. Performs a deep copy of every bucket's linked list.
+    /// @param `const HashTable&`
+    HashTable(const HashTable &other)
+    {
+        int index = 0;
+
+        while (index < SIZE)
+        {
+            dataMap[index] == nullptr;
+
+            Node *otherTemp = other.dataMap[index];
+            Node *lastNode = nullptr;
+
+            while(otherTemp != nullptr){
+
+                Node *newNode = new Node(otherTemp->key, otherTemp->value);
+
+                if(dataMap[index] == nullptr){
+                    dataMap[index] = newNode;
+                }
+                else {
+                    lastNode->next = newNode;
+                }
+
+                lastNode = newNode;
+                otherTemp = otherTemp->next;
+            }
+
+            index++;
+        }
+    }
+    
+
     /// @brief Desctructor who prevents memory leaks.
     ~HashTable()
     {
@@ -63,7 +103,7 @@ public:
 
     /// @brief Return an element by provided key from the Hash table.
     /// @param Key of type `string`
-    /// @return `int`  
+    /// @return `int`
     int get(string key)
     {
         int index = hash(key);
@@ -85,7 +125,7 @@ public:
     }
 
     ///@brief Get all the keys from the Hash table.
-    ///@return `vector<string>` 
+    ///@return `vector<string>`
     vector<string> getAllKeys()
     {
         int index = 0;
@@ -106,7 +146,6 @@ public:
 
         return allKeys;
     }
-
 
 public:
     /// @brief Print every key-value pair in formatted style on the console.
