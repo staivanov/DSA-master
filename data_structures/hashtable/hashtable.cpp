@@ -19,8 +19,10 @@ public:
     ///@brief Default constructor. Initializes every bucket to nullptr.
     HashTable()
     {
-        for (Node *currentNode : dataMap)
-            currentNode == nullptr;
+        for (int i = 0; i < SIZE; i++)
+        {
+            dataMap[i] = nullptr;
+        }
     }
 
     /// @brief Copy constructor. Performs a deep copy of every bucket's linked list.
@@ -67,7 +69,7 @@ public:
         }
 
         int index = 0;
-        //Free existing buckets.
+        // Free existing buckets.
         while (index < SIZE)
         {
             Node *temp = dataMap[index];
@@ -86,19 +88,22 @@ public:
         // Deep copy from other.
         index = 0;
 
-        while(index < SIZE){
+        while (index < SIZE)
+        {
 
-            Node *otherTemp = dataMap[index];
+            Node *otherTemp = other.dataMap[index];
             Node *lastNode = nullptr;
 
-            while(otherTemp){
-
+            while (otherTemp != nullptr)
+            {
                 Node *newNode = new Node(otherTemp->key, otherTemp->value);
 
-                if(dataMap[index] == nullptr){
-                    dataMap[index] == newNode;
+                if (dataMap[index] == nullptr)
+                {
+                    dataMap[index] = newNode;
                 }
-                else {
+                else
+                {
                     lastNode->next = newNode;
                 }
 
