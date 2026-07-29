@@ -36,12 +36,67 @@ public:
             Node *otherTemp = other.dataMap[index];
             Node *lastNode = nullptr;
 
-            while(otherTemp != nullptr){
+            while (otherTemp != nullptr)
+            {
+
+                Node *newNode = new Node(otherTemp->key, otherTemp->value);
+
+                if (dataMap[index] == nullptr)
+                {
+                    dataMap[index] = newNode;
+                }
+                else
+                {
+                    lastNode->next = newNode;
+                }
+
+                lastNode = newNode;
+                otherTemp = otherTemp->next;
+            }
+
+            index++;
+        }
+    }
+
+    /// @brief Copy assignment operator. Frees existing nodes, then deep-copies from other.
+    HashTable &operator=(const HashTable &other)
+    {
+        if (this == &other)
+        {
+            return *this;
+        }
+
+        int index = 0;
+        //Free existing buckets.
+        while (index < SIZE)
+        {
+            Node *temp = dataMap[index];
+
+            while (temp != nullptr)
+            {
+                Node *next = temp->next;
+                delete temp;
+                temp = next;
+            }
+
+            dataMap[index] = nullptr;
+            index++;
+        }
+
+        // Deep copy from other.
+        index = 0;
+
+        while(index < SIZE){
+
+            Node *otherTemp = dataMap[index];
+            Node *lastNode = nullptr;
+
+            while(otherTemp){
 
                 Node *newNode = new Node(otherTemp->key, otherTemp->value);
 
                 if(dataMap[index] == nullptr){
-                    dataMap[index] = newNode;
+                    dataMap[index] == newNode;
                 }
                 else {
                     lastNode->next = newNode;
@@ -53,8 +108,9 @@ public:
 
             index++;
         }
+
+        return *this;
     }
-    
 
     /// @brief Desctructor who prevents memory leaks.
     ~HashTable()
