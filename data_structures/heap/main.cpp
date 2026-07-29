@@ -14,6 +14,6 @@ int main(){
     heap->printHeap();
     heap->remove();
     heap->printHeap();
-
+    
     return 0;
 }   

@@ -32,7 +32,7 @@ class Heap {
             heap[indexTwo] = temp;
     }
 
-
+    ///@brief Inser element of type `int` in the Heap.
     public:
         void insert(int value){
 
@@ -45,8 +45,7 @@ class Heap {
                 current = parent(current);
             }
         }
-
-    public:
+    ///@brief Remove and return element of type `int` from the Heap.
         int remove(){
 
             if(heap.empty()){
@@ -66,8 +65,7 @@ class Heap {
             return maxValue;
         }
 
-
-    public:
+        ///@brief Print all elements in the Heap.
         void printHeap(){
 
             cout << "\n[";
@@ -88,21 +86,22 @@ class Heap {
         }
 
     private:
-        //Compare childres if someone is bigger than paren. If it's true swap till heap is valid.
+        ///@brief Compare childres. If someone is bigger than the parent swap till heap is valid.
         void sinkDown(int index){
 
             int maxIndex = index;
+            int sz = heap.size();
             
             while(true){
 
                 int leftIndex = leftChild(index);
                 int rightIndex = rightChild(index);
 
-                if(heap[leftIndex] > heap[maxIndex] && (leftIndex < heap.size())){
+                if((leftIndex < sz && heap[leftIndex] > heap[maxIndex])){
                     maxIndex = leftIndex;
                 }
 
-                if(heap[rightIndex] > (heap[maxIndex] && (rightIndex < heap.size()))){ 
+                if (rightIndex < sz && heap[rightIndex] > heap[maxIndex]) {
                     maxIndex = rightIndex;
                 }
 
