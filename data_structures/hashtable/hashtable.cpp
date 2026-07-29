@@ -1,116 +1,155 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include "../hashtable/node.cpp"
 
 using std::cout;
 using std::endl;
+using std::string;
 using std::vector;
 
-class HashTable {
+class HashTable
+{
 
-    private:
-        static const int SIZE = 7;
-        Node* dataMap[SIZE];
-        
-    public:
-        void set(string key, int value){
-            int index = hash(key);
-            Node* newNode = new Node(key, value);
+private:
+    static const int SIZE = 7;
+    Node *dataMap[SIZE];
 
-            if(dataMap[index] == nullptr) {
-                
-                dataMap[index] = newNode;
-            } else {
-                Node* temp = dataMap[index];
+public:
+    /// @brief Desctructor who prevents memory leaks.
+    ~HashTable()
+    {
+        int index = 0;
 
-                while(temp->next != nullptr){
-                    temp = temp->next;
-                }
+        while (index < SIZE)
+        {
+            Node *temp = dataMap[index];
 
-                temp->next = newNode;
+            while (temp)
+            {
+                Node *next = temp->next;
+                delete temp;
+                temp = next;
             }
+
+            index++;
         }
+    }
 
-        int get(string key){
+    /// @brief This fuction set a value by provided key into the Hash table.
+    /// @param Key of type `string`.
+    /// @param Value of type `int`.
+    void set(string key, int value)
+    {
+        int index = hash(key);
+        Node *newNode = new Node(key, value);
 
-            int index = hash(key);
-            Node* temp = dataMap[index];
+        if (dataMap[index] == nullptr)
+        {
+            dataMap[index] = newNode;
+        }
+        else
+        {
+            Node *temp = dataMap[index];
 
-            while(temp != nullptr){
-
-                bool isThereKeysMatch = temp->key == key;
-
-                if(isThereKeysMatch) 
-                {
-                    return temp->value;
-                }
-
+            while (temp->next != nullptr)
+            {
                 temp = temp->next;
             }
 
-            return 0;
+            temp->next = newNode;
+        }
+    }
+
+    /// @brief Return an element by provided key from the Hash table.
+    /// @param Key of type `string`
+    /// @return `int`  
+    int get(string key)
+    {
+        int index = hash(key);
+        Node *temp = dataMap[index];
+
+        while (temp != nullptr)
+        {
+            bool isThereKeysMatch = temp->key == key;
+
+            if (isThereKeysMatch)
+            {
+                return temp->value;
+            }
+
+            temp = temp->next;
         }
 
-        
-        vector<string> getAllKeys(){
+        return -1;
+    }
 
-            int index = 0;
-            vector<string> allKeys = {};
+    ///@brief Get all the keys from the Hash table.
+    ///@return `vector<string>` 
+    vector<string> getAllKeys()
+    {
+        int index = 0;
+        vector<string> allKeys = {};
 
-            while(index < SIZE){
+        while (index < SIZE)
+        {
+            Node *temp = dataMap[index];
 
-                Node* temp = dataMap[index];
+            while (temp != nullptr)
+            {
+                allKeys.push_back(temp->key);
+                temp = temp->next;
+            }
 
-                while(temp != nullptr){
+            index++;
+        }
 
-                    allKeys.push_back(temp->key);
+        return allKeys;
+    }
+
+
+public:
+    /// @brief Print every key-value pair in formatted style on the console.
+    void printTable()
+    {
+        int index = 0;
+
+        while (index < SIZE)
+        {
+            cout << index << ":" << endl;
+
+            if (dataMap[index])
+            {
+                Node *temp = dataMap[index];
+
+                while (temp)
+                {
+                    cout << "   {" << temp->key << " - " << temp->value << "}\n";
                     temp = temp->next;
                 }
-
-                index++;
             }
 
-            return allKeys;
+            index++;
         }
+    }
 
+private:
+    /// @brief A hash table uses a hash function to compute an index, also called a hash code, into a vector of buckets or slots, from which the desired value can be found.
+    /// @param Key value of type `string`
+    /// @return `int`
+    int hash(string key)
+    {
+        int hashValue = 0,
+            index = 0,
+            keyLength = key.length();
 
-    public:
-        void printTable(){
-            int index = 0;
-
-            while(index < SIZE){
-
-                cout << index << ":" << endl;
-
-                if(dataMap[index]){
-
-                    Node* temp = dataMap[index];
-
-                    while(temp)
-                    {
-                        cout << "   {" << temp->key << " - " << temp->value << "}\n";
-                        temp = temp->next;
-                    }
-                }
-                
-                index++;
-            }
-        }
-
-    private:
-        int hash(string key)
+        while (index < keyLength)
         {
-            int hash = 0,
-                index = 0,
-                keyLength = key.length();
-
-            while (index < keyLength)
-            {
-                int asciiValue = int(key[index]);
-                hash = (hash + asciiValue * 23) % SIZE;
-                index++;
-            }
-
-            return hash;
+            int asciiValue = int(key[index]);
+            hashValue = (hashValue + asciiValue * 23) % SIZE;
+            index++;
         }
+
+        return hashValue;
+    }
 };
