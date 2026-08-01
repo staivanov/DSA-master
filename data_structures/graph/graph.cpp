@@ -3,6 +3,7 @@
 #include <unordered_set>
 #include <string>
 
+
 using std::unordered_map;
 using std::unordered_set;
 using std::string;
@@ -15,74 +16,67 @@ class Graph {
         unordered_map<string, unordered_set<string>> adjList;
     
     public:
-        bool addVertex(string vertex){
-
-            bool vertexSuccessfullyAdded = true;
+        bool addVertex(const string& vertex){
 
             if(vertexDoesntExist(vertex)){
-
                 adjList[vertex];
 
-                return vertexSuccessfullyAdded;
+                return true;
             }
 
-            return !vertexSuccessfullyAdded;
+            return false;
         }
 
-        bool addEdge(string vertexOne, string vertexTwo){
+        bool addEdge(const string& vertexOne,const  string& vertexTwo){
 
-            bool edgeSuccessfullyAdded = true;
             bool bothVerticesExist = vertexExist(vertexOne) && vertexExist(vertexTwo);
 
             if (bothVerticesExist)
-            {
-                adjList.at(vertexOne).insert(vertexTwo);
+            {   // insert() returns  A pair consisting of an iterator to the inserted element and a bool value set to true if and only if the insertion took place.
+                auto res1 = adjList.at(vertexOne).insert(vertexTwo);
                 adjList.at(vertexTwo).insert(vertexOne);
 
-                return edgeSuccessfullyAdded;
+                return res1.second;
             }
 
-            return !edgeSuccessfullyAdded;
+            return false;
         }
 
-        bool removeVertex(string vertex){
+        bool removeVertex(const string& vertex){
 
-            bool successfullyRemovedVertex = true;
-            
             if(vertexDoesntExist(vertex)){
-                return !successfullyRemovedVertex;
+                return false;
             }
 
-            for(string currentVertex: adjList.at(vertex)){
-                adjList.at(currentVertex).erase(vertex);
+            for(const string& neighbor: adjList.at(vertex)){
+                adjList.at(neighbor).erase(vertex);
             }
+
             adjList.erase(vertex);
 
-            return successfullyRemovedVertex;
+            return true;
         }
 
-        bool removeEdge(string vertexOne, string vertexTwo){
-
-            bool edgeSuccessfullyRemoved = true;
+        bool removeEdge(const string& vertexOne, const string& vertexTwo){
 
             if(vertexExist(vertexOne) && vertexExist(vertexTwo)){
-
-               adjList.at(vertexOne).erase(vertexTwo);
+                // erase() return the count of removed elements. (0 if it wasn't there and 1 for removed)
+               unsigned removedCnt = adjList.at(vertexOne).erase(vertexTwo);
                adjList.at(vertexTwo).erase(vertexOne);
 
-               return edgeSuccessfullyRemoved;
+               return removedCnt > 0;
             }
 
-            return !edgeSuccessfullyRemoved;
+            return false;
         }
 
         void printGraph(){
               
-                for(auto [vertex, edges]: adjList){
+                for(const auto [vertex, edges] : adjList){
 
                     cout << vertex << ": [ ";
 
-                    for(string edge: edges){
+                    for(const string& edge: edges){
                         cout << edge << " ";
                     }
 
@@ -92,11 +86,11 @@ class Graph {
 
 
     private:
-        bool vertexExist(string vertex){
+        bool vertexExist(const string& vertex){
                 return adjList.count(vertex) == 1;
         }
 
-        bool vertexDoesntExist(string vertex){
+        bool vertexDoesntExist(const string& vertex){
                 return adjList.count(vertex) == 0;
         }
 
