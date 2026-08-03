@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../doubly_linked_list/node.cpp"
+#include "node.cpp"
 
 using namespace std;
 
@@ -12,6 +12,9 @@ class DoublyLinkedList {
         int length;
 
     public:
+        /// @brief Default constructor. Creates an empty Doubly Linked List.
+        DoublyLinkedList(): head(nullptr), tail(nullptr), length(0) {}
+
         /// @brief Constructor for Dobly Linked List.
         /// @param value This is the initial elemen when Doubly Linked List is created.
         DoublyLinkedList(int value)
@@ -20,6 +23,45 @@ class DoublyLinkedList {
             head = newNode;
             tail = newNode;
             length = 1;
+        }
+
+        /// @brief Copy constructor. Performs a deep copy of another Doubly Linked List.
+        /// @param other The Doubly Linked List to copy from.
+        DoublyLinkedList(const DoublyLinkedList& other): head(nullptr), tail(nullptr), length(0){
+            
+            Node* temp = other.head;
+
+            while(temp != nullptr){
+                append(temp->value);
+                temp = temp->next;
+            }
+        }
+
+        DoublyLinkedList& operator=(const DoublyLinkedList& other){
+
+            if (this == &other)
+                return *this;
+            // Free existing nodes.
+            while(!isDLLEmpty()){
+                deleteFirst();
+            }
+
+            Node *temp = other.head;
+            // Performs a deep copy.
+            while(temp != nullptr){
+                append(temp->value);
+                temp = temp->next;
+            }
+
+            return *this;
+        }
+
+        /// @brief Desctructor who prevents memory leaks.
+        ~DoublyLinkedList()
+        {
+            while(!isDLLEmpty()){
+                deleteFirst();
+            }
         }
 
     /// @brief Append value at the end of the Doubly Linked List.
@@ -48,7 +90,7 @@ class DoublyLinkedList {
                 head = newNode;
                 tail = newNode;
             } else {
-                newNode->next = newNode;
+                newNode->next = head;
                 head->prev = newNode;
                 head = newNode;
             }
@@ -59,13 +101,14 @@ class DoublyLinkedList {
     /// @return Node* by the provided index. 
     Node* get(int index){
         if(isDLLEmpty()) return nullptr;
+        if(index < 0 || index >= length) return nullptr;
 
         Node* temp = head;
         int start,
             end = index,
             firstHalfDLL = length / 2;
 
-        if(start < firstHalfDLL){
+        if(index < firstHalfDLL){
             for (start = 0; start < end; start++)
             {
                 temp = temp->next;
@@ -95,10 +138,7 @@ class DoublyLinkedList {
             temp->value = value;
             return setSuccessefully;
         }
-        else {
-
-        }
-
+   
         return !setSuccessefully;
     }
 
@@ -110,9 +150,14 @@ class DoublyLinkedList {
 
         bool insertSucceed = true;
 
-        if(isIndexNotValid(index)) return !insertSucceed;
+        if (index < 0 || index > length) return !insertSucceed;
 
         if(isDLLEmpty()){
+            prepend(value);
+            return insertSucceed;
+        }
+
+        if(index == 0){
             prepend(value);
             return insertSucceed;
         }
@@ -177,9 +222,11 @@ class DoublyLinkedList {
     /// @param index The numbered position of an element in the Doubly Linked List.
     void deleteNode(int index){
 
-        if(isIndexNotValid(index)) return;
-        if(isDLLEmpty()) return deleteFirst();
+        if (index == 0) { deleteFirst(); return; }
+        if( index < 0 || index >= length) return;
+
         int lastNode = length - 1;
+
         if(index == lastNode) return deleteLast();
    
         Node* temp = get(index);
@@ -200,39 +247,46 @@ class DoublyLinkedList {
         }
     }
     /// @brief Print value of the head node in the Doubly Linked List.
-    void getHead(){
-        cout << "Head: " << head->value << endl;
+    void getHead() {
+        if(isDLLEmpty())
+        { cout << "Head: nullptr" << endl;
+        }
+        else
+        {
+            cout << "Head: " << head->value << endl;
+        }
     }
     /// @brief Print value of the tail node in the Doubly Linked List.
-    void getTail(){
-        cout << "Tail: " << tail->value << endl;
+    void getTail()  {
+        if(isDLLEmpty()) {
+          cout << "Tail: nullptr" << endl;
+        } 
+        else {
+           cout << "Tail: " << tail->value << endl;
+        }
     }
     /// @brief Print current length of the Doubly Linked List.
-    void getLength(){
+    void getLength() {
+        if(isDLLEmpty()) {
+            cout << "Length: 0" << endl;
+        }
+        else {
         cout << "Length: " << length << endl;
+        }
     }
     
     private:
      /// @brief Check for emptiness of the Doubly Linked List.
      /// @return `true` or `false`
-     bool isDLLEmpty()
+     bool isDLLEmpty() 
         {
             return length == 0;
         }
 
-    private: 
         /// @brief Check is there only one element in the Doubly Linked List.
         /// @param void
         /// @return `true` or `false`
-        bool isDLLContainsOnlyOneElement(void){
+     bool isDLLContainsOnlyOneElement(void) {
             return length == 1;
-        }
-
-    private:
-        /// @brief Check for invalid index based out of the Doubly Linked List position.
-        /// @param index The numbered position of an element in the Doubly Linked List.
-        /// @return `true` or `false`
-        bool isIndexNotValid(int index){
-            return (index < 0) || (index >= length);
         }
 };
