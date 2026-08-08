@@ -6,17 +6,21 @@ class BinarySearchTree {
         Node* root;
  
     public:
+        /// @brief Default constructor for Binary Search Tree.
         BinarySearchTree() {
             root = nullptr;
         }
- 
+        // Prevent shallow copies: BST owns raw pointers, so a default
+        // copy would let two trees think they own the same nodes.
         BinarySearchTree(const BinarySearchTree&) = delete;
         BinarySearchTree& operator=(const BinarySearchTree&) = delete;
- 
+          /// @brief Destructor that deallocate memory that was previlusly allocated.
         ~BinarySearchTree() {
             destroy(root);
         }
- 
+        /// @brief Insert a value at an appropriate position in the Binary Search Tree.
+        /// @param value This is the value that will be inserted.
+        /// @return `true` or `false` representing the result from operation
         bool insert(int value) {
             if (root == nullptr) {
                 root = new Node(value);
@@ -44,7 +48,9 @@ class BinarySearchTree {
                 }
             }
         }
- 
+        /// @brief Determines if the provided value is in the Binary Search Tree.
+        /// @param value This is the value that will be searched for.
+        /// @return `true` or `false` representing the result from operation
         bool contains(int value) {
             Node* temp = root;
             while (temp != nullptr) {
@@ -60,6 +66,8 @@ class BinarySearchTree {
         }
  
     private:
+        /// @brief Recursively deallocate all nodes in the Binary Search Tree.
+        /// @param node 
         void destroy(Node* node) {
             if (node == nullptr) return;
             destroy(node->left);
