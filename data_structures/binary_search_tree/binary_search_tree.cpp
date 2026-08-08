@@ -1,88 +1,69 @@
 #include <iostream>
 #include "../binary_search_tree/node.cpp"
 
-
 class BinarySearchTree {
     public:
         Node* root;
-
+ 
     public:
-        BinarySearchTree(){
+        BinarySearchTree() {
             root = nullptr;
-    }
-
-    bool insert(int value){
-
-        Node* newNode = new Node(value);
-        bool areNodesDifferent = true,
-             nodeSuccessfullyPlaced = true;
-
-        if(root == nullptr){
-            root = newNode;
-            return nodeSuccessfullyPlaced;
         }
-
-        Node* temp = root;
-
-        while(true){ 
-
-            if(newNode->value == temp->value) 
-                return !nodeSuccessfullyPlaced;
-
-            if(newNode->value < temp->value)
-            {
-                bool isLeftSideEmpty = temp->left == nullptr;
-
-                if(isLeftSideEmpty){
-                    temp->left = newNode;
-
-                    nodeSuccessfullyPlaced = true;
-                    return nodeSuccessfullyPlaced;
+ 
+        BinarySearchTree(const BinarySearchTree&) = delete;
+        BinarySearchTree& operator=(const BinarySearchTree&) = delete;
+ 
+        ~BinarySearchTree() {
+            destroy(root);
+        }
+ 
+        bool insert(int value) {
+            if (root == nullptr) {
+                root = new Node(value);
+                return true;
+            }
+ 
+            Node* temp = root;
+            while (true) {
+                if (value == temp->value) {
+                    return false; // duplicate, nothing allocated, nothing leaked
                 }
-
-                temp = temp->left;
-            } else {
-                
-                bool isRightSideEmpty = (temp->right == nullptr);
-
-                if(isRightSideEmpty){
-                    temp->right = newNode;
-
-                        nodeSuccessfullyPlaced = true;
-                    return nodeSuccessfullyPlaced;
+ 
+                if (value < temp->value) {
+                    if (temp->left == nullptr) {
+                        temp->left = new Node(value);
+                        return true;
+                    }
+                    temp = temp->left;
+                } else {
+                    if (temp->right == nullptr) {
+                        temp->right = new Node(value);
+                        return true;
+                    }
+                    temp = temp->right;
                 }
-
-                temp = temp->right;
             }
         }
-    }
-
-    bool contains(int value){
-        
-        bool nodeExist = true;
-
-        if (root == nullptr)
-            return !nodeExist;
-
-        Node* temp = root;
-
-        while (temp != nullptr)
-        {
-            if(value < temp->value){
-
-                temp = temp->left;
-
-            } else if(value > temp->value) {
-
-                temp = temp->right;
+ 
+        bool contains(int value) {
+            Node* temp = root;
+            while (temp != nullptr) {
+                if (value < temp->value) {
+                    temp = temp->left;
+                } else if (value > temp->value) {
+                    temp = temp->right;
+                } else {
+                    return true;
+                }
             }
-            else {
-                
-                return nodeExist;
-            }
+            return false;
         }
-
-        return !nodeExist;
-    }
-
+ 
+    private:
+        void destroy(Node* node) {
+            if (node == nullptr) return;
+            destroy(node->left);
+            destroy(node->right);
+            delete node;
+        }
 };
