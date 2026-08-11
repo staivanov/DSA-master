@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void bubbleSort(int numbers[], int size);
+void bubbleSort(int numbers[], size_t size);
 
 int main(){
 
@@ -17,13 +17,15 @@ int main(){
     return 0;
 }
 
-void bubbleSort(int numbers[], int size){
+void bubbleSort(int numbers[], size_t size){
 
+    if(size < 2) return;
+    
     size_t lastIndex,
         innerIndex, 
         firstIndex = 0;
 
-    for(lastIndex = size - 1; lastIndex > firstIndex; lastIndex--){
+    for(size_t lastIndex = size - 1; lastIndex > firstIndex; lastIndex--){
         for(innerIndex = 0; innerIndex < lastIndex; innerIndex++){
 
             if(numbers[innerIndex] > numbers[innerIndex + 1]){
