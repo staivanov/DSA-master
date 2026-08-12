@@ -4,40 +4,28 @@ using namespace std;
 
 void selectionSort(int numbers[], unsigned size);
 
+int main() {
 
-int main(){
-
-    constexpr unsigned sz = 8;
+    constexpr size_t sz = 8;
     int numbers[sz] = {9, 15, 3, 55, 4, 100, 28, 100};
 
     selectionSort(numbers, sz);
-    signed index = 0,
-            lastIndex = sz - 1;
 
-    while(index < sz){
-        if (index == lastIndex) {
-            cout << numbers[index] << endl;
-            break;
-        }
-
-        cout << numbers[index] << ", ";
-        index++;
-    }
-
+    for (const int number : numbers)
+        cout << number << endl;
 
     return 0;
-}
+};
 
-void selectionSort(int numbers[], unsigned size){
+void selectionSort(int numbers[], size_t size){
 
-    int index, 
-            innerIndex,
-            numbersLen = size;
+    size_t index, 
+            innerIndex;
 
-    for(index = 0; index < numbersLen; index++){
-        int minIndex = index;
+    for(index = 0; index < size; index++){
+        size_t minIndex = index;
 
-        for(innerIndex = index + 1; innerIndex < numbersLen; innerIndex++){
+        for(innerIndex = index + 1; innerIndex < size; innerIndex++){
 
             if(numbers[innerIndex] < numbers[minIndex]){
                 minIndex = innerIndex;
