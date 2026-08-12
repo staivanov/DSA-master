@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void selectionSort(int numbers[], unsigned size);
+void selectionSort(int numbers[], size_t size);
 
 int main() {
 
@@ -16,7 +16,9 @@ int main() {
 
     return 0;
 };
-
+// Selection Sort is an in-place comparison sorting algorithm. 
+// It divides the input array into two parts: a sorted subarray on the left and an unsorted subarray on the right.
+// In each iteration, it finds (selects) the smallest element from the unsorted subarray and swaps it with the leftmost unsorted element.
 void selectionSort(int numbers[], size_t size){
 
     size_t index, 
