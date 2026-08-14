@@ -73,8 +73,4 @@ void quickSort(vector<int> &numbers, int low, int high) {
         quickSort(numbers, low, pi - 1);
         quickSort(numbers, pi + 1, high);
     }
-
-    
-
-
 }
